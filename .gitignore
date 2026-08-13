@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Alfred stores each user's API key and local settings in this file.
+prefs.plist
+
+# Release artifacts are uploaded to GitHub Releases, not committed.
+outputs/*.alfredworkflow
