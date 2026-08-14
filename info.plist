@@ -442,6 +442,6 @@
   <key>version</key>
   <string>1.2.0</string>
   <key>webaddress</key>
-  <string>https://platform.deepseek.com/api_keys</string>
+  <string>https://github.com/fug990/alfred-deepseek-quick-ask</string>
 </dict>
 </plist>

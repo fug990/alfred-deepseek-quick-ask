@@ -60,3 +60,7 @@ plutil -lint info.plist
 ## License
 
 [MIT](LICENSE)
+
+## 项目主页
+
+源码、更新记录与安装包发布在 [fug990/alfred-deepseek-quick-ask](https://github.com/fug990/alfred-deepseek-quick-ask)。
