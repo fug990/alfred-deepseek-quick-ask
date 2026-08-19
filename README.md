@@ -1,15 +1,17 @@
 # DeepSeek Quick Ask for Alfred
 
-一个无需第三方 Python 依赖的 Alfred 5 工作流。输入 `ds 问题`，确认后向 DeepSeek 提问；回答会自动复制到剪贴板，并在 Alfred Large Type 中显示。
+一个无需第三方 Python 依赖的 Alfred 5 工作流。输入 `ds 问题`，确认后向 DeepSeek 提问；回答会自动复制到剪贴板，并在一个简洁、可滚动的原生 macOS 浮层中显示。
 
 > 非 DeepSeek 官方产品。你需要自行提供 DeepSeek API Key，并承担相应 API 费用。
 
 ## 安装与使用
 
-1. 双击 `DeepSeek-Quick-Ask-v1.3.1.alfredworkflow` 导入 Alfred。
+1. 双击 `DeepSeek-Quick-Ask-v1.3.5.alfredworkflow` 导入 Alfred。
 2. 打开 Alfred Preferences → Workflows，选中 **DeepSeek Quick Ask**，点击右上角 `[x]`。
 3. 在 **Workflow Variables** 中填写 `DEEPSEEK_API_KEY`，点击保存。
 4. 输入 `ds 解释一下量子纠缠`，按回车发送。
+
+回答会自动复制到剪贴板，并打开一个紧凑、可滚动的原生浮窗；适合查看长答案，且不会打开 TextEdit 或文档窗口。按 `Esc` 或点击窗口外即可关闭；浮窗会显示在鼠标所在的显示器。
 
 输入 `dsconfig` 可再次查看配置位置提示。
 
@@ -47,7 +49,7 @@ DeepSeek V4 默认开启思考模式。此工作流默认明确关闭它，并�
 | --- | --- | --- |
 | `DEEPSEEK_BASE_URL` | `https://api.deepseek.com/v1` | 兼容代理或自建网关 |
 | `DEEPSEEK_TEMPERATURE` | `0.7` | 生成随机性，范围 0–2 |
-| `DEEPSEEK_MAX_TOKENS` | `1024` | 单次回答上限，范围 1–8192 |
+| `DEEPSEEK_MAX_TOKENS` | `4096` | 单次回答上限，范围 1–8192；长答案建议提高到 `8192` |
 | `DEEPSEEK_SYSTEM_PROMPT` | 中文助手提示词 | 默认回答风格 |
 | `DEEPSEEK_THINKING` | `disabled` | `enabled` 或 `disabled`；通常请使用 `dsthink` 切换 |
 

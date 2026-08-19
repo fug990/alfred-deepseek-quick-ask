@@ -79,10 +79,13 @@ def ask(question: str, history: list[dict[str, str]] | None = None, timeout: int
 
     try:
         data = json.loads(body.decode("utf-8"))
-        message = data["choices"][0]["message"]
+        choice = data["choices"][0]
+        message = choice["message"]
         answer = str(message.get("content") or "").strip()
     except (UnicodeDecodeError, json.JSONDecodeError, KeyError, IndexError, TypeError):
         raise UserFacingError("DeepSeek 返回了无法识别的内容，请稍后重试。") from None
     if not answer:
         raise UserFacingError("DeepSeek 未返回最终答案，请稍后重试。")
+    if choice.get("finish_reason") == "length":
+        answer += "\n\n[回答因达到输出长度上限而截断。请发送“继续”或提高 DEEPSEEK_MAX_TOKENS 后重试。]"
     return answer

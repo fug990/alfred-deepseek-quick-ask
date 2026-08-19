@@ -67,6 +67,21 @@ class DeepSeekClientTests(unittest.TestCase):
 
     @patch("deepseek_client.get_api_key", return_value="test-key")
     @patch("deepseek_client.request.urlopen")
+    def test_marks_length_truncated_answers(
+        self, mock_urlopen: MagicMock, _get_api_key: MagicMock
+    ) -> None:
+        response = MagicMock()
+        response.read.return_value = json.dumps(
+            {"choices": [{"finish_reason": "length", "message": {"content": "未完成"}}]}
+        ).encode("utf-8")
+        mock_urlopen.return_value.__enter__.return_value = response
+
+        answer = deepseek_client.ask("测试问题")
+
+        self.assertIn("达到输出长度上限", answer)
+
+    @patch("deepseek_client.get_api_key", return_value="test-key")
+    @patch("deepseek_client.request.urlopen")
     def test_includes_prior_messages_for_follow_up(
         self, mock_urlopen: MagicMock, _get_api_key: MagicMock
     ) -> None:
