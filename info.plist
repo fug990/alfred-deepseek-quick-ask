@@ -520,7 +520,7 @@
     <string>DEEPSEEK_API_KEY</string>
   </array>
   <key>version</key>
-  <string>1.3.0</string>
+  <string>1.3.1</string>
   <key>webaddress</key>
   <string>https://github.com/fug990/alfred-deepseek-quick-ask</string>
 </dict>

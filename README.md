@@ -6,7 +6,7 @@
 
 ## 安装与使用
 
-1. 双击 `DeepSeek-Quick-Ask-v1.3.0.alfredworkflow` 导入 Alfred。
+1. 双击 `DeepSeek-Quick-Ask-v1.3.1.alfredworkflow` 导入 Alfred。
 2. 打开 Alfred Preferences → Workflows，选中 **DeepSeek Quick Ask**，点击右上角 `[x]`。
 3. 在 **Workflow Variables** 中填写 `DEEPSEEK_API_KEY`，点击保存。
 4. 输入 `ds 解释一下量子纠缠`，按回车发送。

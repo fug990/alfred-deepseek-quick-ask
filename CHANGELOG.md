@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented here.
 
+## 1.3.1 — 2026-08-19
+
+- Fixed `dsthink` for upgrades from earlier versions that do not yet have a `DEEPSEEK_THINKING` variable.
+
 ## 1.3.0 — 2026-08-19
 
 - Explicitly disables DeepSeek V4 thinking mode by default.
