@@ -6,7 +6,7 @@
 
 ## 安装与使用
 
-1. 双击 `DeepSeek-Quick-Ask-v1.1.0.alfredworkflow` 导入 Alfred。
+1. 双击 `DeepSeek-Quick-Ask-v1.3.0.alfredworkflow` 导入 Alfred。
 2. 打开 Alfred Preferences → Workflows，选中 **DeepSeek Quick Ask**，点击右上角 `[x]`。
 3. 在 **Workflow Variables** 中填写 `DEEPSEEK_API_KEY`，点击保存。
 4. 输入 `ds 解释一下量子纠缠`，按回车发送。
@@ -20,6 +20,16 @@
 - 输入 `dsmodel pro`：切换到 `deepseek-v4-pro`（复杂推理与效果优先）。
 
 切换会立即生效，并自动清除当前会话，避免不同模型共用历史上下文。
+
+## 思考过程显示
+
+DeepSeek V4 默认开启思考模式。此工作流默认明确关闭它，并且只显示最终答案，不会把 API 的 `reasoning_content` 当作正文显示。
+
+- 输入 `dsthink`：选择思考模式。
+- 输入 `dsthink disabled`：关闭思考（默认，推荐）。
+- 输入 `dsthink enabled`：开启思考，适用于复杂推理；插件仍只显示最终答案。
+
+切换思考模式会自动清除当前会话。
 
 ## 连续追问
 
@@ -39,6 +49,7 @@
 | `DEEPSEEK_TEMPERATURE` | `0.7` | 生成随机性，范围 0–2 |
 | `DEEPSEEK_MAX_TOKENS` | `1024` | 单次回答上限，范围 1–8192 |
 | `DEEPSEEK_SYSTEM_PROMPT` | 中文助手提示词 | 默认回答风格 |
+| `DEEPSEEK_THINKING` | `disabled` | `enabled` 或 `disabled`；通常请使用 `dsthink` 切换 |
 
 `DEEPSEEK_MODEL` 默认是 `deepseek-v4-flash`。通常请使用 `dsmodel` 切换，而非手动修改变量。
 

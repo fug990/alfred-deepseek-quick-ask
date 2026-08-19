@@ -39,7 +39,7 @@ class DeepSeekClientTests(unittest.TestCase):
 
     @patch("deepseek_client.get_api_key", return_value="test-key")
     @patch("deepseek_client.request.urlopen")
-    def test_uses_reasoning_content_when_content_is_empty(
+    def test_never_uses_reasoning_content_as_the_final_answer(
         self, mock_urlopen: MagicMock, _get_api_key: MagicMock
     ) -> None:
         response = MagicMock()
@@ -48,7 +48,22 @@ class DeepSeekClientTests(unittest.TestCase):
         ).encode("utf-8")
         mock_urlopen.return_value.__enter__.return_value = response
 
-        self.assertEqual(deepseek_client.ask("测试问题"), "推理结果")
+        with self.assertRaisesRegex(UserFacingError, "未返回最终答案"):
+            deepseek_client.ask("测试问题")
+
+    @patch("deepseek_client.get_api_key", return_value="test-key")
+    @patch("deepseek_client.request.urlopen")
+    def test_disables_thinking_by_default(self, mock_urlopen: MagicMock, _get_api_key: MagicMock) -> None:
+        response = MagicMock()
+        response.read.return_value = json.dumps(
+            {"choices": [{"message": {"content": "测试回答"}}]}
+        ).encode("utf-8")
+        mock_urlopen.return_value.__enter__.return_value = response
+
+        deepseek_client.ask("测试问题")
+
+        payload = json.loads(mock_urlopen.call_args.args[0].data.decode("utf-8"))
+        self.assertEqual(payload["thinking"], {"type": "disabled"})
 
     @patch("deepseek_client.get_api_key", return_value="test-key")
     @patch("deepseek_client.request.urlopen")

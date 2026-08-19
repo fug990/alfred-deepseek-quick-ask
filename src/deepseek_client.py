@@ -13,6 +13,7 @@ from common import (
     configured_system_prompt,
     configured_temperature,
     get_api_key,
+    thinking_enabled,
 )
 
 
@@ -41,6 +42,7 @@ def ask(question: str, history: list[dict[str, str]] | None = None, timeout: int
         + [{"role": "user", "content": question}],
         "temperature": configured_temperature(),
         "max_tokens": configured_max_tokens(),
+        "thinking": {"type": "enabled" if thinking_enabled() else "disabled"},
         "stream": False,
     }
     encoded = json.dumps(payload, ensure_ascii=False).encode("utf-8")
@@ -78,9 +80,9 @@ def ask(question: str, history: list[dict[str, str]] | None = None, timeout: int
     try:
         data = json.loads(body.decode("utf-8"))
         message = data["choices"][0]["message"]
-        answer = str(message.get("content") or message.get("reasoning_content") or "").strip()
+        answer = str(message.get("content") or "").strip()
     except (UnicodeDecodeError, json.JSONDecodeError, KeyError, IndexError, TypeError):
         raise UserFacingError("DeepSeek 返回了无法识别的内容，请稍后重试。") from None
     if not answer:
-        raise UserFacingError("DeepSeek 未返回正文，请稍后重试。")
+        raise UserFacingError("DeepSeek 未返回最终答案，请稍后重试。")
     return answer

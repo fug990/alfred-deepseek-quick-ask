@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented here.
 
+## 1.3.0 — 2026-08-19
+
+- Explicitly disables DeepSeek V4 thinking mode by default.
+- Never displays `reasoning_content`; only the model's final answer is shown.
+- Added `dsthink` to switch thinking mode on or off.
+
 ## 1.2.0 — 2026-08-14
 
 - Added `dsmodel` model picker, with `flash` and `pro` shortcuts.

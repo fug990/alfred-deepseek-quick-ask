@@ -18,6 +18,7 @@ DEFAULT_BASE_URL = "https://api.deepseek.com/v1"
 DEFAULT_MODEL = "deepseek-v4-flash"
 DEFAULT_TEMPERATURE = 0.7
 DEFAULT_MAX_TOKENS = 1024
+DEFAULT_THINKING_ENABLED = False
 DEFAULT_SYSTEM_PROMPT = (
     "你是通过 DeepSeek API 提供的准确、简洁、乐于助人的中文助手。"
     "不要声称自己由 OpenAI 或其他公司构建；不确定的信息请明确说明不确定。"
@@ -54,6 +55,14 @@ def configured_max_tokens() -> int:
 
 def configured_system_prompt() -> str:
     return os.environ.get("DEEPSEEK_SYSTEM_PROMPT") or DEFAULT_SYSTEM_PROMPT
+
+
+def thinking_enabled() -> bool:
+    """Return whether DeepSeek's optional reasoning output is requested."""
+    value = os.environ.get("DEEPSEEK_THINKING", "").strip().lower()
+    if not value:
+        return DEFAULT_THINKING_ENABLED
+    return value in {"1", "true", "yes", "on", "enabled"}
 
 
 def get_api_key() -> str | None:

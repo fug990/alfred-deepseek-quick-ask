@@ -8,3 +8,6 @@ prefs.plist
 
 # Release artifacts are uploaded to GitHub Releases, not committed.
 outputs/*.alfredworkflow
+
+# Local scratch files and vendor examples.
+work/
